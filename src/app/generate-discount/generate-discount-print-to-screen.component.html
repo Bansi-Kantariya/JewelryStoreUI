@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h4 class="modal-title">Your Calculation summary is!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row mb-2">
+      <div class="col-md-4">
+        Gold Price per grams :
+      </div>  
+      <div class="col-md-8">
+        {{calculationDetails.goldPrice}}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-4">
+        No of grams :
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.units}}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-4">
+        Total Price :
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.totalprice}}
+      </div>
+    </div>
+
+    <div *ngIf = "isPreviledgeUser" class="row mb-2">
+      <div class="col-md-4">
+        Discount Rates
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.discountRate}}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>

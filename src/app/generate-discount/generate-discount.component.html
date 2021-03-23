@@ -1,0 +1,132 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+        <form novalidate
+            (ngSubmit)="getTotalPrice()"
+            [formGroup]="priceCalculationForm">
+            
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="goldPrice">Gold Price (per Grams)</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="goldPrice"
+                         type="number"
+                         placeholder=""
+                         formControlName="goldPrice"/>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="units">Weight (in grams)</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="units"
+                         type="number"
+                         placeholder=""
+                         formControlName="units"/>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       for="totalprice">Total Price</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="totalprice"
+                         type="number"
+                         placeholder=""
+                         formControlName="totalprice"
+                         [disabled]=false/>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2"
+                *ngIf="isPriviledgeUser">
+                <label class="col-md-2 col-form-label"
+                       for="discountRate">Total Price</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="discountRate"
+                         type="number"
+                         placeholder=""
+                         formControlName="discountRate"/>
+                </div>%
+            </div>
+
+            <button class="btn btn-primary mb-2 mr-5"
+                  type="submit"
+                  [title]="'Calculate Price'">
+                Calculate Price
+            </button>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" 
+                    (click)="printToScreen()">
+                Print To Screen
+            </button>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" 
+                    (click)="printToFile()">
+                Print To File
+            </button>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" 
+                    (click)="printToPaper()">
+                Print To Paper
+            </button>
+
+            <button class="btn btn-outline-primary mb-2 mr-2" 
+                    (click)="cancel()">
+                Cancel
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="pdfhtml" >
+  <div class="modal-header">
+    <h4 class="modal-title">Your Calculation summary is!</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row mb-2">
+      <div class="col-md-4">
+        Gold Price per grams :
+      </div>  
+      <div class="col-md-8">
+        {{calculationDetails.goldPrice}}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-4">
+        No of grams :
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.units}}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-4">
+        Total Price :
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.totalprice}}
+      </div>
+    </div>
+
+    <div *ngIf = "isPriviledgeUser" class="row mb-2">
+      <div class="col-md-4">
+        Discount Rates
+      </div>
+      <div class="col-md-8">
+        {{calculationDetails.discountRate}}
+      </div>
+    </div>
+  </div>
+
+</div>
